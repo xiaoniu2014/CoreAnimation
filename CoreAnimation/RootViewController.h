@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  RootViewController.h
 //  CoreAnimation
 //
 //  Created by hw on 15/10/20.
@@ -8,10 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
-@property (nonatomic,strong) NSString *selectorName;
-
+@interface RootViewController : UITableViewController
 
 @end
-

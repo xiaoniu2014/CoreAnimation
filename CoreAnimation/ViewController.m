@@ -7,8 +7,11 @@
 //
 
 #import "ViewController.h"
+#import "AnimationLibrary.h"
 
 @interface ViewController ()
+
+@property (nonatomic,strong) CALayer *myLayer;
 
 @end
 
@@ -16,12 +19,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    CALayer *layer = [CALayer layer];
+    layer.frame = CGRectMake(50, 94, 50, 50);
+    layer.backgroundColor = [UIColor greenColor].CGColor;
+    layer.cornerRadius = 25;
+    layer.masksToBounds = YES;
+    layer.contents = (id)[UIImage imageNamed:@"AppIcon60x60"].CGImage;
+    [self.view.layer addSublayer:layer];
+    self.myLayer = layer;
+    
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(beginAnimation)];
+    self.navigationItem.rightBarButtonItem = item;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)beginAnimation{
+    SEL selector =  NSSelectorFromString(self.selectorName);
+    AnimationLibrary *animationLib = [AnimationLibrary sharedAnimationLibrary];
+    animationLib.layer = self.myLayer;
+    [animationLib performSelectorOnMainThread:selector withObject:nil waitUntilDone:YES];
+    
 }
+
 
 @end
